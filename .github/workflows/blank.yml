@@ -38,4 +38,4 @@ jobs:
         run: |
           echo "My app password is configured"
           echo "Deploy app correctly"
-```
+
