@@ -15,27 +15,27 @@ jobs:
       - name: Print index.html file
         run: cat index.html
 
-  #     - name: Build Step
-  #       run: |
-  #         echo "Hello this is my ${{ vars.MY_APP }}"
-  #         echo "Hello Pranit"
-  #         echo "This is new cicd mm"
+      - name: Build Step
+        run: |
+          echo "Hello this is my ${{ vars.MY_APP }}"
+          echo "Hello Pranit"
+          echo "This is new cicd mm"
 
-  # test:
-  #   runs-on: ubuntu-latest
-  #   needs: action-demo
+  test:
+    runs-on: ubuntu-latest
+    needs: action-demo
 
-  #   steps:
-  #     - name: Test Phase
-  #       run: echo "Running TC"
+    steps:
+      - name: Test Phase
+        run: echo "Running TC"
 
-  # deploy:
-  #   runs-on: ubuntu-latest
-  #   needs: test
+  deploy:
+    runs-on: ubuntu-latest
+    needs: test
 
-    # steps:
-    #   - name: Deploy the app
-    #     run: |
-    #       echo "My app password is configured"
-    #       echo "Deploy app correctly"
+    steps:
+      - name: Deploy the app
+        run: |
+          echo "My app password is configured"
+          echo "Deploy app correctly"
 
