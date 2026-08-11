@@ -1,14 +1,20 @@
-name: CICD Demo class
+name: GitHub Actions Demo
 
 on:
   push:
 
 jobs:
 
-  build:
+  action-demo:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout the code
+        uses: actions/checkout@v4
+
+      - name: Print index.html file
+        run: cat index.html
+
       - name: Build Step
         run: |
           echo "Hello this is my ${{ vars.MY_APP }}"
@@ -17,7 +23,7 @@ jobs:
 
   test:
     runs-on: ubuntu-latest
-    needs: build
+    needs: action-demo
 
     steps:
       - name: Test Phase
@@ -30,5 +36,6 @@ jobs:
     steps:
       - name: Deploy the app
         run: |
-          echo "My app password is ${{secrets.DOCKER_PASSWORD}}"
+          echo "My app password is configured"
           echo "Deploy app correctly"
+```
