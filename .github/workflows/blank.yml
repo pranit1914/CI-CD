@@ -9,7 +9,8 @@ jobs:
     steps:
       - name: Build Step
         run: |
+          echo " Hello this my ${{vars.MY_APP}}"
           echo "Hello Pranit"
           echo "This is new cicd mm"
-
+ 
   
