@@ -36,6 +36,6 @@ jobs:
     steps:
       - name: Deploy the app
         run: |
-          echo "My app password is configured"
+          echo "My app password is configured gg"
           echo "Deploy app correctly"
 
