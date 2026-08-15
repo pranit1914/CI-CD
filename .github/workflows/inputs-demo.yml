@@ -1,0 +1,22 @@
+name: Input demo
+on: 
+  workflow_dispatch:
+    inputs:
+      ennvironment:
+        description: "Select the Environment"
+        required: true
+        type: choice
+        options:
+          - dev
+          - staging
+          - prod
+
+jobs:
+  inputs-demo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Show env and Deploy the App 
+        run: echo "Deploying to ${{inputs.ennvironment}}"
+      
+    
+      
