@@ -15,4 +15,4 @@ jobs:
           echo "Event: ${{ github.event_name }}"
 
       - name: Print all varibales in JSON format
-        run: "${{toJson(github)}}"
+        run:  echo "${{toJson(github)}}"
