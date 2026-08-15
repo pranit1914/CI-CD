@@ -1,5 +1,7 @@
 name: Env Demo
-on:  workflow_dispatch
+on:
+  push:
+  
 env:
   APP_ENV: "dev"
 
