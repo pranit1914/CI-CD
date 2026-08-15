@@ -1,0 +1,15 @@
+name: Context demo 
+on: 
+  push:
+
+jobs:
+  context-demo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Use context vaiables
+        run: |
+          echo "Repository: ${{ github.repository }}"
+          echo "Branch: ${{ github.ref }}"
+          echo "Commit: ${{ github.sha }}"
+          echo "Actor: ${{ github.actor }}"
+          echo "Event: ${{ github.event_name }}"
