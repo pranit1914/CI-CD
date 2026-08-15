@@ -13,3 +13,6 @@ jobs:
           echo "Commit: ${{ github.sha }}"
           echo "Actor: ${{ github.actor }}"
           echo "Event: ${{ github.event_name }}"
+
+      - name: Print all varibales in JSON format
+        run: "${{toJson(github)}}"
