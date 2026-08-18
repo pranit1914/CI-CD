@@ -1,13 +1,43 @@
-name: Output demo
-on: push
-jobs:
-  job1:
-    runs-on: ubuntu-latest
-    steps:
-      - name: step one
-        id: jacky
-        run: echo "Version=0.0.1" >> $GITHUB_VERSION
+name: CI/CD Output Demo
 
-      - name: step two
-        run : echo "This is ${{ steps.jacky.outputs.version }} version"
- 
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+
+  # ---------------- BUILD JOB ----------------
+  build:
+    runs-on: ubuntu-latest
+
+    # Job output
+    outputs:
+      image_tag: ${{ steps.tag.outputs.image_tag }}
+
+    steps:
+
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Generate Docker image tag
+        id: tag
+        run: echo "image_tag=${GITHUB_SHA}" >> "$GITHUB_OUTPUT"
+
+      - name: Build Docker image
+        run: |
+          echo "Building Docker image..."
+          echo "Image tag = ${{ steps.tag.outputs.image_tag }}"
+
+
+  # ---------------- DEPLOY JOB ----------------
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Deploy application
+        run: |
+          echo "Deploying application..."
+          echo "Docker image tag = ${{ needs.build.outputs.image_tag }}"
