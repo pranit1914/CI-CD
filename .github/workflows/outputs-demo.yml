@@ -10,7 +10,7 @@ jobs:
   # ---------------- BUILD JOB ----------------
   build:
     runs-on: ubuntu-latest
-
+ 
     # Job output
     outputs:
       image_tag: ${{ steps.tag.outputs.image_tag }}
