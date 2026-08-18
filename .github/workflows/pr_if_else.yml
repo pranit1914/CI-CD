@@ -14,13 +14,13 @@ jobs:
     if: github.event_name == 'pull_request'
     steps:
       - name: Build Step
-        run: echo "helllo applicatio is running"
+        run: echo "Building an application ......"
 
   deploy:
       runs-on: ubuntu-latest
       if: github.event_name == 'push' && github.ref_name == 'main'
       steps:
         - name: Deploy Step
-          run: echo "Deploying the app"
+          run: echo "Deploying the app ....waiting"
   
       
