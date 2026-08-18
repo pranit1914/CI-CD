@@ -1,16 +1,57 @@
 name: If-else demo
-on: 
+
+on:
   push:
-     branches:
-       - main
-       - develop
+    branches:
+      - main
+      - develop
 
 jobs:
-  demo:
+
+  # ---------------- BUILD JOB ----------------
+  build:
     runs-on: ubuntu-latest
+
     steps:
-      - name : Run if branch is main
-        if: github.ref == 'refs/heads/main'
-        run: echo "Running for main branch"
-      - name: run this step
-        run: echo "running this step"
+
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build application
+        run: |
+          echo "Building application..."
+          echo "Build successful"
+
+
+  # ---------------- PRODUCTION DEPLOYMENT ----------------
+  deploy-production:
+    needs: build
+    runs-on: ubuntu-latest
+
+    # IF branch is main
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+
+      - name: Deploy to Production
+        run: |
+          echo "Branch = ${{ github.ref }}"
+          echo "Condition = TRUE"
+          echo "Deploying application to PRODUCTION..."
+
+
+  # ---------------- DEVELOPMENT DEPLOYMENT ----------------
+  deploy-development:
+    needs: build
+    runs-on: ubuntu-latest
+
+    # ELSE branch is not main
+    if: github.ref != 'refs/heads/main'
+
+    steps:
+
+      - name: Deploy to Development
+        run: |
+          echo "Branch = ${{ github.ref }}"
+          echo "Condition = TRUE for ELSE"
+          echo "Deploying application to DEVELOPMENT..."
