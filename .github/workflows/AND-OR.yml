@@ -1,0 +1,61 @@
+name: AND OR Condition Demo
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+      - feature/login
+
+jobs:
+
+  # ---------------- BUILD ----------------
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build application
+        run: |
+          echo "Building application..."
+          echo "Build successful"
+
+
+  # ---------------- OR CONDITION ----------------
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    # OR condition
+    # Run if branch is main OR develop
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop' ## if u write pushes feature/login it fails
+
+    steps:
+
+      - name: Deploy application
+        run: |
+          echo "Branch = ${{ github.ref }}"
+          echo "Branch is main OR develop"
+          echo "Deploying application..."
+
+
+  # ---------------- AND CONDITION ----------------
+  production-deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    # AND condition
+    # Run only if branch is main AND event is push
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+
+    steps:
+
+      - name: Deploy to Production
+        run: |
+          echo "Branch = ${{ github.ref }}"
+          echo "Event = ${{ github.event_name }}"
+          echo "Branch is main AND event is push"
+          echo "Deploying to PRODUCTION..."
