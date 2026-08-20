@@ -26,7 +26,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Production  Deploy
-        run: echo "Deploying the code to Production environment"
+        run: |
+          echo "Deploying the code to Production environment"
+          exit 1
 
   Success_notify:
     needs:
