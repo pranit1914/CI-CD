@@ -1,26 +1,34 @@
-name: pull_request if else
-on: 
-  push: 
+name: Pull Request CI/CD
+
+on:
+  push:
     branches:
       - main
+
   pull_request:
-    types:  
+    branches:
+      - main
+    types:
       - opened
       - synchronize
- 
+
 jobs:
+
   build:
     runs-on: ubuntu-latest
     if: github.event_name == 'pull_request'
+
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
       - name: Build Step
         run: echo "Building an application ......"
 
   deploy:
-      runs-on: ubuntu-latest
-      if: github.event_name == 'push' && github.ref_name == 'main'
-      steps:
-        - name: Deploy Step
-          run: echo "Deploying the app ....waiting"
-  
-      
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref_name == 'main'
+
+    steps:
+      - name: Deploy Step
+        run: echo "Deploying the app ....waiting"
